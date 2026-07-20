@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>State Boards – E-Pathshala</title>
+    <!-- Google Fonts (matching landing.html) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- RESET & BASE (matching landing theme) ---------- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            background: #0b0806;
+            color: #e6dccb;
+            padding: 20px;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 3%),
+                radial-gradient(circle at 85% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 3%),
+                radial-gradient(circle at 50% 50%, rgba(107, 29, 42, 0.08) 0%, transparent 40%);
+        }
+
+        /* ---------- GRAND COLOR VARIABLES (same as landing) ---------- */
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8C84A;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --maroon: #6B1D2A;
+            --saffron: #FF8C00;
+            --dark-bg: #0b0806;
+            --card-bg: #1a1410;
+            --card-border: #3d2b1f;
+            --text-primary: #f0e6d8;
+            --text-secondary: #c4b5a0;
+            --text-muted: #8a7a66;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            --radius: 16px;
+        }
+
+        /* ---------- CARD CONTAINER (opulent glass) ---------- */
+        .wrapper {
+            text-align: center;
+            max-width: 1100px;
+            width: 100%;
+            padding: 30px 35px 40px;
+            background: rgba(20, 15, 12, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            pointer-events: none;
+        }
+
+        .wrapper:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.03);
+        }
+
+        /* ---------- TOP BAR: Logo + Back Button ---------- */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .logo i {
+            color: var(--saffron);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 6px rgba(255, 140, 0, 0.3));
+        }
+
+        .logo span {
+            color: var(--text-primary);
+            font-weight: 300;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateX(-4px);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .back-btn i {
+            font-size: 1rem;
+        }
+
+        /* ---------- HEADING ---------- */
+        .heading {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .heading .highlight {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+        }
+
+        .subheading {
+            font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            opacity: 0.8;
+        }
+
+        /* ---------- BOARD GRID ---------- */
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* ---------- BOARD BUTTON (gold gradient) ---------- */
+        .btn-board {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 14px 12px;
+            background: linear-gradient(135deg, #1a1410, #2a1f16);
+            color: var(--text-primary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 60px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.01em;
+            text-align: center;
+            min-height: 48px;
+            word-break: break-word;
+            line-height: 1.3;
+        }
+
+        .btn-board::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 60px;
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .btn-board:hover::before {
+            opacity: 0.12;
+        }
+
+        .btn-board:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        .btn-board:active {
+            transform: scale(0.96);
+        }
+
+        .btn-board span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* small state abbreviation as badge */
+        .btn-board .abbr {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            padding: 0 8px;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            line-height: 1.8;
+            letter-spacing: 0.04em;
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+            color: var(--gold);
+        }
+
+        /* ---------- FOOTER NOTE ---------- */
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 20px;
+        }
+
+        .footer-note span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 20px 16px 28px;
+                border-radius: 28px;
+            }
+
+            .top-bar {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .back-btn {
+                font-size: 0.85rem;
+                padding: 6px 14px;
+            }
+
+            .board-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 10px;
+            }
+
+            .btn-board {
+                padding: 12px 10px;
+                font-size: 0.75rem;
+                min-height: 42px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                padding: 16px 12px 24px;
+                border-radius: 24px;
+            }
+
+            .board-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .btn-board {
+                padding: 10px 6px;
+                font-size: 0.7rem;
+                min-height: 38px;
+                border-radius: 40px;
+            }
+
+            .btn-board .abbr {
+                font-size: 0.5rem;
+                padding: 0 5px;
+            }
+
+            .sub-note {
+                font-size: 0.75rem;
+                margin-bottom: 20px;
+            }
+
+            .footer-note {
+                font-size: 0.65rem;
+                gap: 4px 12px;
+            }
+        }
+
+        /* ---------- ACCESSIBILITY ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .btn-board:focus-visible,
+        .back-btn:focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 4px;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: #0b0806;
+        }
+
+        /* ---------- SEARCH CONTAINER ---------- */
+        .search-container {
+            margin: 10px auto 25px;
+            max-width: 500px;
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            background: #140e0a;
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: #1c140e;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), inset 0 2px 6px rgba(0,0,0,0.5);
+            transform: scale(1.02);
+        }
+
+        .search-container i.search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .search-input:focus + i.search-icon {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .no-results {
+            display: none;
+            margin: 40px auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+            animation: searchFadeIn 0.4s ease forwards;
+        }
+
+        @keyframes searchFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- TOP BAR: E-Pathshala Branding + Back Button -->
+        <div class="top-bar">
+            <a href="landing.html" class="logo" style="text-decoration: none;">
+                <i class="fas fa-graduation-cap"></i>
+                E-<span>Pathshala</span>
+            </a>
+            <a href="landing.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Go Back
+            </a>
+        </div>
+
+        <!-- main heading -->
+        <h1 class="heading">
+            <span class="highlight">State Education Boards</span>
+        </h1>
+        <p class="subheading">Official websites of all major state boards across India</p>
+        <p class="sub-note">⬇ Click any board to visit its website — find textbooks, syllabi &amp; question papers in PDF</p>
+
+        <!-- Live Search Bar -->
+        <div class="search-container">
+            <input type="text" id="boardSearch" class="search-input" placeholder="Search state board by name or abbreviation (e.g., Bihar, UP)...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <div id="noResults" class="no-results">
+            <i class="fas fa-search-minus" style="font-size: 2rem; color: var(--gold); display: block; margin-bottom: 10px;"></i>
+            No state boards found matching your search. Please try another term!
+        </div>
+
+        <!-- grid of state board buttons -->
+        <div class="board-grid" id="boardGrid">
+
+            <!-- Andhra Pradesh -->
+            <a href="https://bse.ap.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Andhra Pradesh <span class="abbr">AP</span></span>
+            </a>
+
+            <!-- Assam -->
+            <a href="https://ahsec.assam.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Assam <span class="abbr">AS</span></span>
+            </a>
+
+            <!-- Bihar -->
+            <a href="https://biharboardonline.bihar.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Bihar <span class="abbr">BR</span></span>
+            </a>
+
+            <!-- Chhattisgarh -->
+            <a href="https://cgbse.nic.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Chhattisgarh <span class="abbr">CG</span></span>
+            </a>
+
+            <!-- Goa -->
+            <a href="https://gbshse.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Goa <span class="abbr">GA</span></span>
+            </a>
+
+            <!-- Gujarat -->
+            <a href="https://gseb.org/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Gujarat <span class="abbr">GJ</span></span>
+            </a>
+
+            <!-- Haryana -->
+            <a href="https://bseh.org.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Haryana <span class="abbr">HR</span></span>
+            </a>
+
+            <!-- Himachal Pradesh -->
+            <a href="https://hpbose.org/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Himachal Pradesh <span class="abbr">HP</span></span>
+            </a>
+
+            <!-- Jharkhand -->
+            <a href="https://jac.jharkhand.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Jharkhand <span class="abbr">JH</span></span>
+            </a>
+
+            <!-- Karnataka -->
+            <a href="https://sslc.karnataka.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Karnataka <span class="abbr">KA</span></span>
+            </a>
+
+            <!-- Kerala -->
+            <a href="https://kerala.gov.in/departments/general-education" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Kerala <span class="abbr">KL</span></span>
+            </a>
+
+            <!-- Madhya Pradesh -->
+            <a href="https://mpbse.nic.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Madhya Pradesh <span class="abbr">MP</span></span>
+            </a>
+
+            <!-- Maharashtra -->
+            <a href="https://mahahsscboard.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Maharashtra <span class="abbr">MH</span></span>
+            </a>
+
+            <!-- Manipur -->
+            <a href="https://www.manipurboard.nic.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Manipur <span class="abbr">MN</span></span>
+            </a>
+
+            <!-- Meghalaya -->
+            <a href="https://mbose.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Meghalaya <span class="abbr">ML</span></span>
+            </a>
+
+            <!-- Mizoram -->
+            <a href="https://mbse.mizoram.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Mizoram <span class="abbr">MZ</span></span>
+            </a>
+
+            <!-- Nagaland -->
+            <a href="https://nbse.nagaland.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Nagaland <span class="abbr">NL</span></span>
+            </a>
+
+            <!-- Odisha -->
+            <a href="https://www.bseodisha.nic.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Odisha <span class="abbr">OD</span></span>
+            </a>
+
+            <!-- Punjab -->
+            <a href="https://pseb.ac.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Punjab <span class="abbr">PB</span></span>
+            </a>
+
+            <!-- Rajasthan -->
+            <a href="https://rajeduboard.rajasthan.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Rajasthan <span class="abbr">RJ</span></span>
+            </a>
+
+            <!-- Sikkim -->
+            <a href="https://sikkim.gov.in/departments/education" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Sikkim <span class="abbr">SK</span></span>
+            </a>
+
+            <!-- Tamil Nadu (CORRECTED to official government site) -->
+            <a href="https://www.tndge.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Tamil Nadu <span class="abbr">TN</span></span>
+            </a>
+
+            <!-- Telangana -->
+            <a href="https://tsbie.cgg.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Telangana <span class="abbr">TS</span></span>
+            </a>
+
+            <!-- Tripura -->
+            <a href="https://tbse.tripura.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Tripura <span class="abbr">TR</span></span>
+            </a>
+
+            <!-- Uttar Pradesh -->
+            <a href="https://upmsp.edu.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Uttar Pradesh <span class="abbr">UP</span></span>
+            </a>
+
+            <!-- Uttarakhand -->
+            <a href="https://ubse.uk.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Uttarakhand <span class="abbr">UK</span></span>
+            </a>
+
+            <!-- West Bengal -->
+            <a href="https://wbbse.wb.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>West Bengal <span class="abbr">WB</span></span>
+            </a>
+
+            <!-- Delhi (UT) -->
+            <a href="https://dbse.delhi.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Delhi <span class="abbr">DL</span></span>
+            </a>
+
+            <!-- Jammu & Kashmir (UT) -->
+            <a href="https://jkbose.nic.in/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Jammu &amp; Kashmir <span class="abbr">JK</span></span>
+            </a>
+
+            <!-- Ladakh (UT) -->
+            <a href="https://ladakh.gov.in/departments/school-education/" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Ladakh <span class="abbr">LA</span></span>
+            </a>
+
+            <!-- Puducherry (UT) -->
+            <a href="https://www.py.gov.in/departments/education" target="_blank" rel="noopener noreferrer" class="btn-board">
+                <span>Puducherry <span class="abbr">PY</span></span>
+            </a>
+
+        </div>
+
+        <!-- footer -->
+        <div class="footer-note">
+            <span>📘 Textbooks</span>
+            <span>📋 Syllabi</span>
+            <span>📄 Question Papers</span>
+            <span>🔗 All links open in new tab</span>
+        </div>
+    </div>
+
+<script>
+    // Live Search Filter Logic
+    document.getElementById('boardSearch').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const boards = document.querySelectorAll('#boardGrid .btn-board');
+        const noResults = document.getElementById('noResults');
+        let visibleCount = 0;
+
+        boards.forEach(board => {
+            const text = board.textContent.toLowerCase();
+            if (text.includes(query)) {
+                board.style.display = 'inline-flex';
+                visibleCount++;
+            } else {
+                board.style.display = 'none';
+            }
+        });
+
+        if (visibleCount === 0) {
+            noResults.style.display = 'block';
+        } else {
+            noResults.style.display = 'none';
+        }
+    });
+
+    // Chatbase embed (kept as per original)
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="qNiRU1zISoLh29RWAgLBv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>

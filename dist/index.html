@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Pathshala – India's Grand Learning Hub</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0b0806;
+            color: #e6dccb;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            /* Ultra-regal subtle patterned background */
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 3%),
+                radial-gradient(circle at 85% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 3%),
+                radial-gradient(circle at 50% 50%, rgba(107, 29, 42, 0.08) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(212, 175, 55, 0.01) 20px, rgba(212, 175, 55, 0.01) 21px);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ----- GRAND COLOR VARIABLES ----- */
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8C84A;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --maroon: #6B1D2A;
+            --maroon-deep: #3D0E16;
+            --saffron: #FF8C00;
+            --cream: #F5E6D3;
+            --dark-bg: #0b0806;
+            --card-bg: #1a1410;
+            --card-border: #3d2b1f;
+            --text-primary: #f0e6d8;
+            --text-secondary: #c4b5a0;
+            --text-muted: #8a7a66;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            --radius: 16px;
+            --nav-bg: rgba(11, 8, 6, 0.96);
+        }
+
+        /* ----- SHIMMER ANIMATION (Gold glow) ----- */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .gold-shimmer {
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold), var(--gold-light));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 5s linear infinite;
+        }
+
+        /* ----- DECORATIVE ELEMENTS ----- */
+        .ornament-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            color: var(--gold);
+            font-size: 1.2rem;
+            opacity: 0.4;
+            letter-spacing: 4px;
+            margin: 6px 0 10px;
+        }
+        .ornament-divider span {
+            font-size: 1.8rem;
+        }
+
+        .opulent-border {
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .opulent-border::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border: 1px solid var(--gold);
+            border-radius: var(--radius);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* ----- HEADER / NAVIGATION ----- */
+        header {
+            background: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, transparent, var(--gold), transparent) 1;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .logo i {
+            color: var(--saffron);
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 6px rgba(255, 140, 0, 0.3));
+        }
+
+        .logo span {
+            color: var(--text-primary);
+            font-weight: 300;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a {
+            transition: color 0.3s, text-shadow 0.3s;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            box-shadow: 0 0 12px var(--gold-glow);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            color: #0b0806 !important;
+            padding: 8px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px var(--gold-glow);
+            text-shadow: none !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 40px var(--gold-glow);
+            color: #0b0806 !important;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* ----- HERO (Grand Indian Opulence) ----- */
+        .hero {
+            background: radial-gradient(ellipse at 30% 20%, #2a1510 0%, #0b0806 80%);
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .hero::before {
+            content: "📚";  /* replaced ॐ with a book emoji */
+            position: absolute;
+            font-size: 26rem;
+            opacity: 0.025;
+            top: -15%;
+            right: -5%;
+            transform: rotate(-6deg);
+            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .ornament {
+            display: inline-block;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 6px;
+            letter-spacing: 12px;
+            opacity: 0.6;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+        }
+
+        .hero h1 .highlight-green {
+            color: var(--saffron);
+            -webkit-text-fill-color: var(--saffron);
+            text-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 16px auto 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #b8960f);
+            color: #0b0806;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 48px rgba(212, 175, 55, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--gold);
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: #0b0806;
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px var(--gold-glow);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            color: #0b0806;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-green:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 48px rgba(212, 175, 55, 0.6);
+        }
+
+        /* ----- BOARDS SECTION (Grand) ----- */
+        .boards-section {
+            padding: 70px 0 60px;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        .boards-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.3;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .section-title i {
+            color: var(--gold);
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 10px;
+        }
+
+        .board-card {
+            display: block;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--card-border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .board-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--saffron), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .board-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .board-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(212, 175, 55, 0.05);
+            background: #241b14;
+        }
+
+        .board-card .icon {
+            font-size: 3.4rem;
+            margin-bottom: 12px;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .board-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .board-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        .board-card .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            color: #0b0806;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 20px;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* ----- FEATURES (Exclusive / Grand) ----- */
+        .features {
+            padding: 70px 0;
+            background: #100c0a;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+            position: relative;
+        }
+
+        .features::before {
+            content: '◆ ◇ ◆ ◇ ◆';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 10px;
+            background: #100c0a;
+            padding: 0 24px;
+            opacity: 0.5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: 0.4s ease;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::after {
+            content: '✦';
+            position: absolute;
+            bottom: 16px;
+            right: 24px;
+            color: var(--gold);
+            opacity: 0.08;
+            font-size: 2.8rem;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.04);
+        }
+
+        .feature-item i {
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+        }
+
+        /* ----- ABOUT / STATS (Grand) ----- */
+        .about-mini {
+            padding: 50px 0 40px;
+            background: var(--dark-bg);
+            text-align: center;
+            position: relative;
+        }
+
+        .about-mini::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.2;
+        }
+
+        .about-mini p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            font-weight: 600;
+        }
+
+        .stat-item .number {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.2));
+        }
+
+        .stat-item .label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* ----- FOOTER (Grand) ----- */
+        footer {
+            background: #080504;
+            color: var(--text-secondary);
+            padding: 40px 0 25px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        footer::before {
+            content: '✧ ✦ ✧ ✦ ✧';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 12px;
+            background: #080504;
+            padding: 0 24px;
+            opacity: 0.5;
+        }
+
+        footer .logo {
+            justify-content: center;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        footer .logo span {
+            color: var(--text-primary);
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            margin-top: 8px;
+            color: var(--text-muted);
+        }
+
+        .footer-email {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .footer-email i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .footer-email a {
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .footer-email a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--nav-bg);
+                padding: 20px 0;
+                border-top: 1px solid rgba(212, 175, 55, 0.15);
+                margin-top: 12px;
+                gap: 16px;
+                text-align: center;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .board-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stats {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .board-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            .hero .ornament {
+                font-size: 1.4rem;
+                letter-spacing: 6px;
+            }
+        }
+
+        /* ----- ACCESSIBILITY ----- */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .btn-primary:focus-visible,
+        .btn-secondary:focus-visible,
+        .btn-green:focus-visible,
+        .board-card:focus-visible,
+        .feature-item:focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 4px;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: #0b0806;
+        }
+
+        /* ----- STUDENT COMPANION & POMODORO ----- */
+        .companion-section {
+            padding: 70px 0;
+            background: #0d0907;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+            position: relative;
+        }
+
+        .companion-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.3;
+        }
+
+        .companion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .companion-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 35px 30px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .companion-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            pointer-events: none;
+        }
+
+        .companion-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.03);
+            transform: translateY(-5px);
+        }
+
+        .companion-card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .companion-card-title i {
+            color: var(--gold);
+            filter: drop-shadow(0 0 6px var(--gold-glow));
+        }
+
+        .companion-card-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            text-align: center;
+            max-width: 320px;
+        }
+
+        /* --- POMODORO TIMER SPECIFICS --- */
+        .timer-svg-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 25px;
+        }
+
+        .timer-svg-container svg {
+            transform: rotate(-90deg);
+        }
+
+        .timer-bg-circle {
+            fill: none;
+            stroke: rgba(212, 175, 55, 0.08);
+            stroke-width: 8;
+        }
+
+        .timer-progress-circle {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s linear;
+        }
+
+        .timer-time-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .timer-modes {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timer-mode-btn {
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timer-mode-btn.active {
+            background: var(--gold);
+            color: #0b0806;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            max-width: 260px;
+        }
+
+        .timer-btn {
+            flex: 1;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+        }
+
+        .timer-btn-primary {
+            background: linear-gradient(135deg, var(--gold), #b8960f);
+            color: #0b0806;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+
+        .timer-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .timer-btn-secondary {
+            background: transparent;
+            border: 1.5px solid var(--card-border);
+            color: var(--text-secondary);
+        }
+
+        .timer-btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .timer-stats-badge {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- QUIZ CHALLENGE SPECIFICS --- */
+        .quiz-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .quiz-question-box {
+            background: #140e0a;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            border: 1px solid var(--card-border);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            text-align: left;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            min-height: 72px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .quiz-option-btn {
+            background: #1e1611;
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-option-btn:hover:not(:disabled) {
+            border-color: var(--gold);
+            background: #251c16;
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+
+        .quiz-option-btn.correct {
+            background: rgba(19, 136, 8, 0.15) !important;
+            border-color: #138808 !important;
+            color: #d1ffd0 !important;
+        }
+
+        .quiz-option-btn.incorrect {
+            background: rgba(107, 29, 42, 0.25) !important;
+            border-color: #6b1d2a !important;
+            color: #ffcbd2 !important;
+        }
+
+        .quiz-feedback-box {
+            background: #15100c;
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            border: 1.5px dashed rgba(212, 175, 55, 0.3);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: left;
+            display: none;
+            animation: searchFadeIn 0.3s ease;
+        }
+
+        .quiz-stats-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 15px;
+            border-top: 1px solid var(--card-border);
+            padding-top: 15px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .quiz-streak {
+            color: var(--saffron);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ----------------------------------------
+           PREMIUM ANIMATIONS & MICRO-INTERACTIONS
+           ---------------------------------------- */
+
+        /* Floating effects on logos and icons */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .logo i {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+        .timer-svg-container {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Gold-Light Shimmer/Sweeper effect on Cards */
+        .board-card, .feature-item, .companion-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .board-card::after, .feature-item::after, .companion-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(212, 175, 55, 0.1),
+                transparent
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
+            transition: none;
+        }
+
+        .board-card:hover::after, .feature-item:hover::after, .companion-card:hover::after {
+            left: 150%;
+            transition: left 1.2s cubic-bezier(0.25, 1, 0.2, 1);
+        }
+
+        /* Hero Entrance Keyframes */
+        @keyframes heroReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            opacity: 0;
+            animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.1s;
+        }
+
+        .hero p {
+            opacity: 0;
+            animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .hero-buttons {
+            opacity: 0;
+            animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero .ornament {
+            opacity: 0;
+            animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0s;
+        }
+
+        /* Reveal on Scroll */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delay helpers */
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+
+        /* Click Ripple Effect */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            transform: scale(0);
+            pointer-events: none;
+            animation: ripple-anim 0.6s cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+
+        @keyframes ripple-anim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Quiz Feedback Transition Animations */
+        .quiz-question-box, .quiz-options {
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .quiz-updating {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        /* Error/Shake effect */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .shake-element {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Active timer pulse */
+        @keyframes timerPulse {
+            0%, 100% {
+                text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+                transform: translate(-50%, -50%) scale(1.04);
+            }
+        }
+
+        .timer-time-active {
+            animation: timerPulse 1.5s ease-in-out infinite;
+        }
+
+        /* Announcement Banner Styles */
+        .announcement-banner {
+            position: relative;
+            background: linear-gradient(135deg, #1f140e 0%, #0d0907 100%);
+            border-bottom: 2px solid var(--gold);
+            color: var(--text-primary);
+            padding: 12px 40px 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            z-index: 1001;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, border-bottom-color 0.5s ease;
+            max-height: 120px;
+            opacity: 1;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .announcement-banner.dismissed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            border-bottom-color: transparent;
+        }
+
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 1100px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .announcement-badge {
+            background: linear-gradient(135deg, var(--gold), var(--saffron));
+            color: #0b0806;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .announcement-text {
+            color: var(--text-primary);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .announcement-close-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .announcement-close-btn:hover {
+            color: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* 20 Second Progress Bar */
+        .announcement-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--saffron));
+            width: 100%;
+            transform-origin: left;
+            animation: bannerProgress 20s linear forwards;
+        }
+
+        @keyframes bannerProgress {
+            from {
+                transform: scaleX(1);
+            }
+            to {
+                transform: scaleX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .announcement-banner {
+                padding: 14px 45px 14px 15px;
+                font-size: 0.85rem;
+            }
+            .announcement-content {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== ANNOUNCEMENT BANNER ===== -->
+    <div id="announcementBanner" class="announcement-banner">
+        <div class="announcement-content">
+            <span class="announcement-badge"><i class="fas fa-robot"></i> Chatbot Online</span>
+            <span class="announcement-text">Our study chatbot, which was temporarily unavailable, is now enabled with advanced capabilities!</span>
+        </div>
+        <button id="closeBannerBtn" class="announcement-close-btn" aria-label="Close Announcement">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="announcement-progress"></div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                E-<span>Pathshala</span>
+            </div>
+            <nav class="nav-links" id="navLinks">
+                <a href="#boards">Boards</a>
+                <a href="#features">Features</a>
+                <a href="#companion">Success Hub</a>
+                <a href="#about">About</a>
+                <a href="#" class="nav-cta">Home</a>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="ornament">◈ ◈ ◈</div>
+            <h1>
+                <span class="highlight">All</span> Boards, <br>
+                <span class="highlight-green gold-shimmer">One</span> Supreme Platform
+            </h1>
+            <p>
+                Access textbooks, practice problems &amp; more — for CBSE, ICSE, State Boards, NIOS and beyond.
+                <strong>Free. Forever.</strong>
+            </p>
+            <div class="hero-buttons">
+                <a href="#boards" class="btn btn-primary"><i class="fas fa-book-open"></i> Browse Collection</a>
+                <a href="https://www.chatbase.co/qNiRU1zISoLh29RWAgLBv/help" class="btn btn-secondary"><i class="fas fa-puzzle-piece"></i> Solve Problems</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BOARDS SECTION ===== -->
+    <section class="boards-section" id="boards">
+        <div class="container">
+            <h2 class="section-title reveal-element"><i class="fas fa-university"></i> Choose Your Board</h2>
+            <p class="section-subtitle reveal-element stagger-delay-1">Click on your board to access books and study materials.</p>
+
+            <div class="board-grid">
+                <a href="cbse.html" class="board-card opulent-border reveal-element stagger-delay-1 ripple-effect">
+                    <span class="icon">🏫</span>
+                    <h3>CBSE &amp; NCERT</h3>
+                    <p>Central Board of Secondary Education and all boards following NCERT</p>
+                    <span class="badge">NCERT</span>
+                </a>
+                <a href="icse.html" class="board-card opulent-border reveal-element stagger-delay-2 ripple-effect">
+                    <span class="icon">📖</span>
+                    <h3>CISCE (ICSE / ISC)</h3>
+                    <p>Indian Certificate of Secondary Education</p>
+                    <span class="badge">ICSE / ISC</span>
+                </a>
+                <a href="state-board.html" class="board-card opulent-border reveal-element stagger-delay-3 ripple-effect">
+                    <span class="icon">🗺️</span>
+                    <h3>State Boards</h3>
+                    <p>UP, Bihar, Maharashtra, Tamil Nadu &amp; more</p>
+                    <span class="badge">State-wise</span>
+                </a>
+                <a href="nios.html" class="board-card opulent-border reveal-element stagger-delay-4 ripple-effect">
+                    <span class="icon">🌐</span>
+                    <h3>NIOS</h3>
+                    <p>National Institute of Open Schooling</p>
+                    <span class="badge">Open School</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES (Exclusive / Grand) ===== -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title reveal-element"><i class="fas fa-gem"></i> Exclusive Features</h2>
+            <p class="section-subtitle reveal-element stagger-delay-1">Unlock powerful tools to ace your studies.</p>
+            <div class="features-grid">
+                <a href="https://ndl.education.gov.in/home" class="feature-item opulent-border reveal-element stagger-delay-2 ripple-effect">
+                    <i class="fas fa-book-reader"></i>
+                    <h3>Digital Library</h3>
+                    <p>Read textbooks from all boards right in your browser. No downloads needed.</p>
+                </a>
+                <a href="https://www.chatbase.co/chatbot-iframe/AL95uDhbdsadmwFhvgQdw" class="feature-item opulent-border reveal-element stagger-delay-3 ripple-effect">
+                    <i class="fas fa-brain"></i>
+                    <h3>Problem Solver</h3>
+                    <p>Practice with subject-wise questions, get instant feedback, and track progress.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STUDENT SUCCESS HUB (Pomodoro Study Timer & Interactive Board Challenge Quiz) ===== -->
+    <section class="companion-section" id="companion">
+        <div class="container">
+            <h2 class="section-title reveal-element"><i class="fas fa-rocket"></i> Student Success Hub</h2>
+            <p class="section-subtitle reveal-element stagger-delay-1">Boost your learning efficiency with premium active learning tools.</p>
+            
+            <div class="companion-grid">
+                <!-- Card 1: Pomodoro Study Timer -->
+                <div class="companion-card reveal-element stagger-delay-2 ripple-effect">
+                    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <div class="companion-card-title">
+                            <i class="fas fa-hourglass-half"></i> Study Timer
+                        </div>
+                        <div class="companion-card-subtitle">
+                            Use the scientific Pomodoro technique to stay completely focused while reading textbooks.
+                        </div>
+                        
+                        <div class="timer-svg-container">
+                            <svg width="180" height="180">
+                                <circle class="timer-bg-circle" cx="90" cy="90" r="80" />
+                                <circle class="timer-progress-circle" id="timerProgress" cx="90" cy="90" r="80" stroke-dasharray="502.6" stroke-dashoffset="0" />
+                            </svg>
+                            <div class="timer-time-display" id="timerTime">25:00</div>
+                        </div>
+                        
+                        <div class="timer-modes">
+                            <button class="timer-mode-btn active" id="btnModeFocus" onclick="setTimerMode('focus')">Focus (25m)</button>
+                            <button class="timer-mode-btn" id="btnModeShort" onclick="setTimerMode('short')">Short Break (5m)</button>
+                            <button class="timer-mode-btn" id="btnModeLong" onclick="setTimerMode('long')">Long Break (15m)</button>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <div class="timer-controls">
+                            <button class="timer-btn timer-btn-primary" id="timerPlayPauseBtn" onclick="toggleTimer()">Start Focus</button>
+                            <button class="timer-btn timer-btn-secondary" onclick="resetTimer()">Reset</button>
+                        </div>
+                        
+                        <div class="timer-stats-badge">
+                            <i class="fas fa-award"></i> Sessions completed: <strong id="completedSessionsCount">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Interactive Board Challenge -->
+                <div class="companion-card reveal-element stagger-delay-3 ripple-effect">
+                    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <div class="companion-card-title">
+                            <i class="fas fa-medal"></i> Daily Board Challenge
+                        </div>
+                        <div class="companion-card-subtitle">
+                            Test your conceptual clarity with hand-picked curriculum questions from CBSE & State Boards.
+                        </div>
+                        
+                        <div class="quiz-container">
+                            <div class="quiz-question-box" id="quizQuestion">
+                                Loading board challenge...
+                            </div>
+                            <div class="quiz-options" id="quizOptions">
+                                <!-- Options rendered dynamically -->
+                            </div>
+                            <div class="quiz-feedback-box" id="quizFeedback">
+                                <!-- Feedback explanation -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-stats-row">
+                        <div class="quiz-streak">
+                            <i class="fas fa-fire"></i> Streak: <span id="quizStreakCount">0</span>
+                        </div>
+                        <div>
+                            High Score: <strong id="quizHighScore">0</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT / STATS ===== -->
+    <section class="about-mini reveal-element" id="about">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-heart" style="color:var(--gold);"></i> Made for Every Indian Student</h2>
+            <p>
+                E-Pathshala is a student-first initiative to democratize education by bringing all curriculum resources under one grand roof.
+            </p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="number">39+</span>
+                    <span class="label">Boards Covered</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">12</span>
+                    <span class="label">Classes (1–12)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">100%</span>
+                    <span class="label">Free Access</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="justify-content:center;">
+                <i class="fas fa-graduation-cap"></i>
+                E-<span>Pathshala</span>
+            </div>
+            <p>&copy; 2026 E-Pathshala · Designed with ❤️ for the Inter-House Competition</p>
+
+            <div class="footer-email">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:swastik20130201@gmail.com">Contact me for sugestions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MOBILE MENU TOGGLE & ACTIVE LEARNING SUITE ===== -->
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // ----------------------------------------
+        // Web Audio Synthesizer (Chime effect on complete)
+        // ----------------------------------------
+        function playSuccessSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Beep 1 (C5)
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc1.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2);
+                gain1.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain1.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+                
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                osc1.start();
+                osc1.stop(audioCtx.currentTime + 0.6);
+
+                // Beep 2 (E5 to C6 chime ripple)
+                setTimeout(() => {
+                    const osc2 = audioCtx.createOscillator();
+                    const gain2 = audioCtx.createGain();
+                    osc2.type = 'triangle';
+                    osc2.frequency.setValueAtTime(659.25, audioCtx.currentTime);
+                    osc2.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.2);
+                    gain2.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+                    
+                    osc2.connect(gain2);
+                    gain2.connect(audioCtx.destination);
+                    osc2.start();
+                    osc2.stop(audioCtx.currentTime + 0.8);
+                }, 150);
+            } catch (err) {
+                console.log('Web Audio Context blocked or unsupported', err);
+            }
+        }
+
+        // ----------------------------------------
+        // Pomodoro Timer Logic
+        // ----------------------------------------
+        let timerSeconds = 1500; // 25 mins initial
+        let timerInitialSeconds = 1500;
+        let timerInterval = null;
+        let timerIsRunning = false;
+        let currentMode = 'focus';
+
+        const timerTimeDisplay = document.getElementById('timerTime');
+        const timerProgressCircle = document.getElementById('timerProgress');
+        const timerPlayPauseBtn = document.getElementById('timerPlayPauseBtn');
+        const completedSessionsCount = document.getElementById('completedSessionsCount');
+
+        // Restore completed session count
+        let sessionsCount = parseInt(localStorage.getItem('epathshala_sessions_count') || '0', 10);
+        completedSessionsCount.innerText = sessionsCount;
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            timerTimeDisplay.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            
+            // Circular Progress Calculation
+            const totalLength = 502.6; // 2 * PI * r (r=80)
+            const progressFraction = timerSeconds / timerInitialSeconds;
+            const strokeDashoffset = totalLength * (1 - progressFraction);
+            timerProgressCircle.style.strokeDashoffset = strokeDashoffset;
+        }
+
+        function setTimerMode(mode) {
+            clearInterval(timerInterval);
+            timerIsRunning = false;
+            currentMode = mode;
+            timerPlayPauseBtn.innerText = 'Start ' + (mode === 'focus' ? 'Focus' : 'Break');
+            timerPlayPauseBtn.className = 'timer-btn timer-btn-primary';
+            timerTimeDisplay.classList.remove('timer-time-active');
+
+            // Switch active classes
+            document.getElementById('btnModeFocus').classList.remove('active');
+            document.getElementById('btnModeShort').classList.remove('active');
+            document.getElementById('btnModeLong').classList.remove('active');
+
+            if (mode === 'focus') {
+                timerSeconds = 1500;
+                document.getElementById('btnModeFocus').classList.add('active');
+            } else if (mode === 'short') {
+                timerSeconds = 300;
+                document.getElementById('btnModeShort').classList.add('active');
+            } else if (mode === 'long') {
+                timerSeconds = 900;
+                document.getElementById('btnModeLong').classList.add('active');
+            }
+            timerInitialSeconds = timerSeconds;
+            updateTimerDisplay();
+        }
+
+        function toggleTimer() {
+            if (timerIsRunning) {
+                // Pause
+                clearInterval(timerInterval);
+                timerIsRunning = false;
+                timerPlayPauseBtn.innerText = 'Resume';
+                timerPlayPauseBtn.className = 'timer-btn timer-btn-primary';
+                timerTimeDisplay.classList.remove('timer-time-active');
+            } else {
+                // Start
+                timerIsRunning = true;
+                timerPlayPauseBtn.innerText = 'Pause';
+                timerPlayPauseBtn.className = 'timer-btn timer-btn-secondary';
+                timerTimeDisplay.classList.add('timer-time-active');
+                timerInterval = setInterval(() => {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                    
+                    if (timerSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        timerIsRunning = false;
+                        timerTimeDisplay.classList.remove('timer-time-active');
+                        playSuccessSound();
+                        
+                        if (currentMode === 'focus') {
+                            sessionsCount++;
+                            localStorage.setItem('epathshala_sessions_count', sessionsCount);
+                            completedSessionsCount.innerText = sessionsCount;
+                            alert("Excellent! Focus session complete. Take a relaxing break!");
+                            setTimerMode('short');
+                        } else {
+                            alert("Break finished! Ready to achieve greatness?");
+                            setTimerMode('focus');
+                        }
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerIsRunning = false;
+            timerSeconds = timerInitialSeconds;
+            timerPlayPauseBtn.innerText = 'Start ' + (currentMode === 'focus' ? 'Focus' : 'Break');
+            timerPlayPauseBtn.className = 'timer-btn timer-btn-primary';
+            timerTimeDisplay.classList.remove('timer-time-active');
+            updateTimerDisplay();
+        }
+
+        updateTimerDisplay();
+
+        // ----------------------------------------
+        // Interactive Curriculum Quiz Logic
+        // ----------------------------------------
+        const quizQuestions = [
+            {
+                question: "Which cellular process represents the breakdown of food molecules in cells to release energy?",
+                options: ["Photosynthesis", "Respiration", "Transpiration", "Excretion"],
+                correct: 1,
+                explanation: "Respiration is the metabolic process where glucose is oxidized in mitochondria to synthesize ATP (energy currency)."
+            },
+            {
+                question: "In Mathematics, if the discriminant of a quadratic equation (b² - 4ac) is negative, what is the nature of the roots?",
+                options: ["Real and equal", "Real and distinct", "No real roots (Complex/Imaginary)", "Rational and unequal"],
+                correct: 2,
+                explanation: "A negative discriminant (D < 0) yields complex conjugate roots because you cannot compute real square roots of negative numbers."
+            },
+            {
+                question: "Which chemical compound is known commercially as Bleaching Powder, commonly used for disinfecting water?",
+                options: ["Calcium Carbonate", "Sodium Hydrogen Carbonate", "Calcium Oxychloride", "Sodium Hydroxide"],
+                correct: 2,
+                explanation: "Calcium Oxychloride (CaOCl₂), or calcium hypochlorite, is used widely for sanitary bleaching and water treatment."
+            },
+            {
+                question: "Who among the following was the founder of the Maurya Empire in ancient India?",
+                options: ["Ashoka the Great", "Chandragupta Maurya", "Samudragupta", "Harsha Vardhana"],
+                correct: 1,
+                explanation: "Chandragupta Maurya founded the Mauryan dynasty in 322 BCE, consolidating power with the master strategist Chanakya."
+            },
+            {
+                question: "What is the SI unit of electric potential difference (commonly known as voltage)?",
+                options: ["Ampere", "Ohm", "Volt", "Watt"],
+                correct: 2,
+                explanation: "The Volt (V) is the SI unit of electrical potential difference, defined as one joule of energy consumed per coulomb of charge."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let streak = parseInt(localStorage.getItem('epathshala_quiz_streak') || '0', 10);
+        let highScore = parseInt(localStorage.getItem('epathshala_quiz_highscore') || '0', 10);
+
+        const quizQuestionEl = document.getElementById('quizQuestion');
+        const quizOptionsEl = document.getElementById('quizOptions');
+        const quizFeedbackEl = document.getElementById('quizFeedback');
+        const streakEl = document.getElementById('quizStreakCount');
+        const highScoreEl = document.getElementById('quizHighScore');
+
+        streakEl.innerText = streak;
+        highScoreEl.innerText = highScore;
+
+        function loadQuestion() {
+            // Add fade-out transition class
+            quizQuestionEl.classList.add('quiz-updating');
+            quizOptionsEl.classList.add('quiz-updating');
+
+            setTimeout(() => {
+                currentQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
+                const q = quizQuestions[currentQuestionIndex];
+                
+                quizQuestionEl.innerText = q.question;
+                quizFeedbackEl.style.display = 'none';
+                quizFeedbackEl.innerHTML = '';
+                quizOptionsEl.innerHTML = '';
+
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quiz-option-btn';
+                    btn.innerHTML = `<span>${opt}</span> <i class="far fa-circle"></i>`;
+                    btn.onclick = () => selectOption(idx, btn);
+                    quizOptionsEl.appendChild(btn);
+                });
+
+                // Fade back in
+                quizQuestionEl.classList.remove('quiz-updating');
+                quizOptionsEl.classList.remove('quiz-updating');
+            }, 220);
+        }
+
+        function selectOption(selectedIdx, btnElement) {
+            const q = quizQuestions[currentQuestionIndex];
+            const optionButtons = quizOptionsEl.querySelectorAll('.quiz-option-btn');
+
+            optionButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedIdx === q.correct) {
+                btnElement.classList.add('correct');
+                btnElement.querySelector('i').className = 'fas fa-check-circle';
+                
+                // Add soft scale punch on correct
+                btnElement.style.transform = 'scale(1.03)';
+                setTimeout(() => btnElement.style.transform = '', 300);
+
+                streak++;
+                if (streak > highScore) {
+                    highScore = streak;
+                    localStorage.setItem('epathshala_quiz_highscore', highScore);
+                    highScoreEl.innerText = highScore;
+                }
+                localStorage.setItem('epathshala_quiz_streak', streak);
+                streakEl.innerText = streak;
+
+                quizFeedbackEl.style.display = 'block';
+                quizFeedbackEl.innerHTML = `<strong style="color:#d1ffd0;"><i class="fas fa-check"></i> Correct Answer!</strong><p style="margin-top:6px; line-height: 1.5;">${q.explanation}</p><button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8rem; margin-top: 10px; width: auto;" onclick="loadQuestion()">Next Challenge</button>`;
+            } else {
+                btnElement.classList.add('incorrect');
+                btnElement.querySelector('i').className = 'fas fa-times-circle';
+                
+                // Shake incorrect button
+                btnElement.classList.add('shake-element');
+                setTimeout(() => btnElement.classList.remove('shake-element'), 410);
+
+                optionButtons[q.correct].classList.add('correct');
+                optionButtons[q.correct].querySelector('i').className = 'fas fa-check-circle';
+
+                streak = 0;
+                localStorage.setItem('epathshala_quiz_streak', streak);
+                streakEl.innerText = streak;
+
+                quizFeedbackEl.style.display = 'block';
+                quizFeedbackEl.innerHTML = `<strong style="color:#ffcbd2;"><i class="fas fa-times"></i> Incorrect.</strong><p style="margin-top:6px; line-height: 1.5;">${q.explanation}</p><button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8rem; margin-top: 10px; width: auto;" onclick="loadQuestion()">Try Another</button>`;
+            }
+        }
+
+        loadQuestion();
+
+        // ----------------------------------------
+        // IntersectionObserver for Scroll Reveal
+        // ----------------------------------------
+        const revealElements = document.querySelectorAll('.reveal-element');
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            revealElements.forEach((el) => observer.observe(el));
+        } else {
+            // Fallback
+            revealElements.forEach((el) => el.classList.add('revealed'));
+        }
+
+        // ----------------------------------------
+        // Interactive Ripple Click Effect
+        // ----------------------------------------
+        document.addEventListener('click', function(e) {
+            // Target any clickable item
+            const target = e.target.closest('.btn, .board-card, .feature-item, .companion-card, .timer-mode-btn, .timer-btn, .quiz-option-btn, .back-btn');
+            if (!target) return;
+
+            // Make sure target is positioned relatively
+            if (window.getComputedStyle(target).position === 'static') {
+                target.style.position = 'relative';
+            }
+
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            
+            const rect = target.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = `${size}px`;
+
+            const x = e.clientX - rect.left - (size / 2);
+            const y = e.clientY - rect.top - (size / 2);
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            // Clear any existing ripple
+            const existing = target.querySelector('.ripple');
+            if (existing) existing.remove();
+
+            target.appendChild(ripple);
+
+            // Remove after animation completes
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // ----------------------------------------
+        // Announcement Banner Controller
+        // ----------------------------------------
+        const announcementBanner = document.getElementById('announcementBanner');
+        const closeBannerBtn = document.getElementById('closeBannerBtn');
+
+        if (announcementBanner && closeBannerBtn) {
+            // Function to dismiss banner
+            const dismissBanner = () => {
+                announcementBanner.classList.add('dismissed');
+                // Remove from DOM after transition completes to keep it clean
+                setTimeout(() => {
+                    announcementBanner.remove();
+                }, 500);
+            };
+
+            // Manual close
+            closeBannerBtn.addEventListener('click', dismissBanner);
+
+            // Auto close after 20 seconds (20000 ms)
+            setTimeout(dismissBanner, 20000);
+        }
+    </script>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="qNiRU1zISoLh29RWAgLBv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
