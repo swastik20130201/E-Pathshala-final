@@ -1,0 +1,12 @@
+{
+  "name": "e-pathshala",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "mkdir -p dist && cp landing.html dist/index.html && cp landing.html dist/landing.html && cp cbse.html dist/ && cp icse.html dist/ && cp nios.html dist/ && cp state-board.html dist/",
+    "lint": "echo 'No linting needed for static HTML'"
+  }
+}
