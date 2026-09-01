@@ -77,15 +77,6 @@ npm run build
 
 This command creates a `dist/` directory with all necessary files ready for deployment.
 
-## 📖 Usage
-
-### Accessing Different Board Resources
-
-- **Home/Landing Page**: http://localhost:3000/
-- **CBSE Resources**: http://localhost:3000/cbse.html
-- **ICSE Resources**: http://localhost:3000/icse.html
-- **NIOS Resources**: http://localhost:3000/nios.html
-- **State Board Resources**: http://localhost:3000/state-board.html
 
 ## 🛠️ Technical Details
 
